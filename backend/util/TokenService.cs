@@ -15,10 +15,6 @@ public class TokenService
         _issuer = configuration["Jwt:Issuer"];
         _audience = configuration["Jwt:Audience"];
 
-        Console.WriteLine($"Secret Key: {configuration["Jwt:SecretKey"]}");
-        Console.WriteLine($"Issuer: {configuration["Jwt:Issuer"]}");
-        Console.WriteLine($"Audience: {configuration["Jwt:Audience"]}");
-
         if (string.IsNullOrEmpty(_secretKey))
             throw new ArgumentNullException("Jwt:SecretKey is not set in configuration.");
         if (string.IsNullOrEmpty(_issuer))

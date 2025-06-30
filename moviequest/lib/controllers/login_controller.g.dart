@@ -154,44 +154,125 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
-  late final _$formKeyLoginAtom =
-      Atom(name: '_LoginController.formKeyLogin', context: context);
+  late final _$oldPasswordChangeAtom =
+      Atom(name: '_LoginController.oldPasswordChange', context: context);
 
   @override
-  GlobalKey<FormState> get formKeyLogin {
-    _$formKeyLoginAtom.reportRead();
-    return super.formKeyLogin;
+  TextEditingController get oldPasswordChange {
+    _$oldPasswordChangeAtom.reportRead();
+    return super.oldPasswordChange;
   }
 
   @override
-  set formKeyLogin(GlobalKey<FormState> value) {
-    _$formKeyLoginAtom.reportWrite(value, super.formKeyLogin, () {
-      super.formKeyLogin = value;
+  set oldPasswordChange(TextEditingController value) {
+    _$oldPasswordChangeAtom.reportWrite(value, super.oldPasswordChange, () {
+      super.oldPasswordChange = value;
     });
   }
 
-  late final _$formKeyCreatAcountAtom =
-      Atom(name: '_LoginController.formKeyCreatAcount', context: context);
+  late final _$passwordChangeNewAtom =
+      Atom(name: '_LoginController.passwordChangeNew', context: context);
 
   @override
-  GlobalKey<FormState> get formKeyCreatAcount {
-    _$formKeyCreatAcountAtom.reportRead();
-    return super.formKeyCreatAcount;
+  TextEditingController get passwordChangeNew {
+    _$passwordChangeNewAtom.reportRead();
+    return super.passwordChangeNew;
   }
 
   @override
-  set formKeyCreatAcount(GlobalKey<FormState> value) {
-    _$formKeyCreatAcountAtom.reportWrite(value, super.formKeyCreatAcount, () {
-      super.formKeyCreatAcount = value;
+  set passwordChangeNew(TextEditingController value) {
+    _$passwordChangeNewAtom.reportWrite(value, super.passwordChangeNew, () {
+      super.passwordChangeNew = value;
     });
+  }
+
+  late final _$passwordChangeNewConfirmAtom =
+      Atom(name: '_LoginController.passwordChangeNewConfirm', context: context);
+
+  @override
+  TextEditingController get passwordChangeNewConfirm {
+    _$passwordChangeNewConfirmAtom.reportRead();
+    return super.passwordChangeNewConfirm;
+  }
+
+  @override
+  set passwordChangeNewConfirm(TextEditingController value) {
+    _$passwordChangeNewConfirmAtom
+        .reportWrite(value, super.passwordChangeNewConfirm, () {
+      super.passwordChangeNewConfirm = value;
+    });
+  }
+
+  late final _$passwordDeletAcountAtom =
+      Atom(name: '_LoginController.passwordDeletAcount', context: context);
+
+  @override
+  TextEditingController get passwordDeletAcount {
+    _$passwordDeletAcountAtom.reportRead();
+    return super.passwordDeletAcount;
+  }
+
+  @override
+  set passwordDeletAcount(TextEditingController value) {
+    _$passwordDeletAcountAtom.reportWrite(value, super.passwordDeletAcount, () {
+      super.passwordDeletAcount = value;
+    });
+  }
+
+  late final _$deletContextAtom =
+      Atom(name: '_LoginController.deletContext', context: context);
+
+  @override
+  BuildContext get deletContext {
+    _$deletContextAtom.reportRead();
+    return super.deletContext;
+  }
+
+  bool _deletContextIsInitialized = false;
+
+  @override
+  set deletContext(BuildContext value) {
+    _$deletContextAtom.reportWrite(
+        value, _deletContextIsInitialized ? super.deletContext : null, () {
+      super.deletContext = value;
+      _deletContextIsInitialized = true;
+    });
+  }
+
+  late final _$userAtom = Atom(name: '_LoginController.user', context: context);
+
+  @override
+  UserModel get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  bool _userIsInitialized = false;
+
+  @override
+  set user(UserModel value) {
+    _$userAtom.reportWrite(value, _userIsInitialized ? super.user : null, () {
+      super.user = value;
+      _userIsInitialized = true;
+    });
+  }
+
+  late final _$validateTokenAsyncAction =
+      AsyncAction('_LoginController.validateToken', context: context);
+
+  @override
+  Future<void> validateToken(BuildContext context) {
+    return _$validateTokenAsyncAction.run(() => super.validateToken(context));
   }
 
   late final _$loginAsyncAction =
       AsyncAction('_LoginController.login', context: context);
 
   @override
-  Future<void> login({required BuildContext context}) {
-    return _$loginAsyncAction.run(() => super.login(context: context));
+  Future<void> login(
+      {required BuildContext context, required GlobalKey<FormState> formKey}) {
+    return _$loginAsyncAction
+        .run(() => super.login(context: context, formKey: formKey));
   }
 
   late final _$_LoginControllerActionController =
@@ -203,17 +284,6 @@ mixin _$LoginController on _LoginController, Store {
         name: '_LoginController.switchLogin');
     try {
       return super.switchLogin();
-    } finally {
-      _$_LoginControllerActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void switchLoadin() {
-    final _$actionInfo = _$_LoginControllerActionController.startAction(
-        name: '_LoginController.switchLoadin');
-    try {
-      return super.switchLoadin();
     } finally {
       _$_LoginControllerActionController.endAction(_$actionInfo);
     }
@@ -242,8 +312,12 @@ emailRegister: ${emailRegister},
 passwordRegister: ${passwordRegister},
 nameRegister: ${nameRegister},
 passwordConfirmRegister: ${passwordConfirmRegister},
-formKeyLogin: ${formKeyLogin},
-formKeyCreatAcount: ${formKeyCreatAcount}
+oldPasswordChange: ${oldPasswordChange},
+passwordChangeNew: ${passwordChangeNew},
+passwordChangeNewConfirm: ${passwordChangeNewConfirm},
+passwordDeletAcount: ${passwordDeletAcount},
+deletContext: ${deletContext},
+user: ${user}
     ''';
   }
 }

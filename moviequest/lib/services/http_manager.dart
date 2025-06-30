@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:moviequest/services/utils_services.dart';
 
 abstract class HttpMetod {
@@ -11,19 +10,14 @@ abstract class HttpMetod {
 }
 
 class HttpManager {
+  UtilsServices utilsServices = UtilsServices();
+
   Future restRequest({
     required String url,
     required String method,
-    Map? headers,
+    Map<String, dynamic>? headers,
     Map? body,
   }) async {
-    //! Header da requisição
-    final defaulHeaders = headers?.cast<String, String>() ?? {}
-      ..addAll({
-        'content-type': 'application/json',
-        'accept': 'application/json',
-      });
-
     Dio dio = Dio();
 
     try {
@@ -31,6 +25,7 @@ class HttpManager {
         url,
         options: Options(
           method: method,
+          headers: headers,
         ),
         data: body,
       );
@@ -38,7 +33,7 @@ class HttpManager {
     } on DioException catch (error) {
       return error.response?.data ?? {};
     } catch (message) {
-      UtilsServices.showToast(message: message, isError: true);
+      //  utilsServices.showToast(message: message, isError: true);
     }
   }
 }

@@ -13,35 +13,17 @@ class Button extends StatelessWidget {
 
   final String text;
   final VoidCallback onClick;
+  
 
   @override
   Widget build(BuildContext context) {
+    AppTheme appTheme = AppTheme();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: ElevatedButton(
-        style: AppTheme.buttonStyle,
+        style: appTheme.buttonStyle,
         onPressed: onClick,
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-            fontStyle: FontStyle.italic,
-            letterSpacing: 1.25,
-            shadows: [
-              Shadow(
-                blurRadius: 5,
-                color: Colors.black,
-                offset: Offset(1.0, 1.0),
-              ),
-              Shadow(
-                blurRadius: 5,
-                color: Colors.black,
-                offset: Offset(-1.0, -1.0),
-              ),
-            ],
-          ),
-        ),
+        child: Text(text, style: appTheme.buttonTextStyle),
       ),
     );
   }

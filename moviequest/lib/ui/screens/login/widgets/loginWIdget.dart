@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:moviequest/controllers/login_controller.dart';
 import 'package:moviequest/ui/core/theme/theme.dart';
@@ -6,22 +7,27 @@ import 'package:moviequest/ui/widgets/button.dart';
 import 'package:moviequest/ui/widgets/textFildStyle.dart';
 
 class LoginWIdget extends StatefulWidget {
-  const LoginWIdget({Key? key}) : super(key: key);
+  const LoginWIdget({super.key});
 
   @override
-  _LoginWIdgetState createState() => _LoginWIdgetState();
+  State<LoginWIdget> createState() => _LoginWIdgetState();
 }
 
 class _LoginWIdgetState extends State<LoginWIdget> {
-  final LoginController controller = LoginController();
+  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _createAccountFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final LoginController controller = Provider.of<LoginController>(context);
+
+    AppTheme appTheme = AppTheme();
+
     return Observer(
       builder: (_) => Stack(
         children: [
           controller.isLoading
-              ? Container(
+              ? SizedBox(
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
@@ -43,7 +49,7 @@ class _LoginWIdgetState extends State<LoginWIdget> {
                       ),
                       child: controller.isLogin
                           ? Form(
-                              key: controller.formKeyCreatAcount,
+                              key: _createAccountFormKey,
                               child: Column(
                                 children: [
                                   TextFildStyle(
@@ -72,7 +78,8 @@ class _LoginWIdgetState extends State<LoginWIdget> {
                                       Button(
                                         text: "Criar contar",
                                         onClick: () => controller.createAcont(
-                                            context: context),
+                                            context: context,
+                                            formKey: _createAccountFormKey),
                                       ),
                                       Expanded(child: Container()),
                                       Button(
@@ -86,7 +93,7 @@ class _LoginWIdgetState extends State<LoginWIdget> {
                               ),
                             )
                           : Form(
-                              key: controller.formKeyLogin,
+                              key: _loginFormKey,
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -109,7 +116,7 @@ class _LoginWIdgetState extends State<LoginWIdget> {
                                       ),
                                       Text(
                                         'Manter Conectado',
-                                        style: AppTheme.textLogin,
+                                        style: appTheme.textLogin,
                                       )
                                     ],
                                   ),
@@ -118,8 +125,10 @@ class _LoginWIdgetState extends State<LoginWIdget> {
                                       Expanded(child: Container()),
                                       Button(
                                         text: "Login",
-                                        onClick: () =>
-                                            controller.login(context: context),
+                                        onClick: () => controller.login(
+                                          context: context,
+                                          formKey: _loginFormKey,
+                                        ),
                                       ),
                                       Expanded(child: Container()),
                                       Button(
@@ -132,7 +141,7 @@ class _LoginWIdgetState extends State<LoginWIdget> {
                                   Expanded(child: Container()),
                                   Button(
                                     text: "Entrar sem login",
-                                    onClick: () => controller.enterWithoutLogin(
+                                    onClick: () => controller.BrowseAteHome(
                                         context: context),
                                   ),
                                   Expanded(child: Container()),

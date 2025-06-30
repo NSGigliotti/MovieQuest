@@ -1,4 +1,4 @@
-INSERT INTO moviequest.questions (Id, Name, MovieImages, CorrectAnswer, Answers, Difficulty) VALUES 
+INSERT INTO moviequest.Questions (Id, Name, MovieImages, CorrectAnswer, Answers, Difficulty) VALUES 
 ('c7z5w3a9r8f5p6g2', 
  'O Senhor dos Anéis: A Sociedade do Anel', 
  '7db2bd5ae6a711eb9f1710ddb1aba44f,e625cda6e6a611eb9f1710ddb1aba44f,e41cda3ce6aa11eb9f1710ddb1aba44f,157462f8e6a611eb9f1710ddb1aba44f,8f65389ee6a611eb9f1710ddb1aba44f,777ea710e6ab11eb9f1710ddb1aba44f,68eb99cee6a611eb9f1710ddb1aba44f,06723bbae6a411eb9f1710ddb1aba44f,898bfbaae6a711eb9f1710ddb1aba44f', 

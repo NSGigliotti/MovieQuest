@@ -1,0 +1,51 @@
+services:
+  
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: 759486
+      MYSQL_DATABASE: moviequest
+      MYSQL_USER: UsuarioRoot
+      MYSQL_PASSWORD: 123456 
+    ports:
+      - "3307:3306"
+    networks:
+      - backend_network
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck: 
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  backend:
+   container_name: moviequest_backend
+   build:
+    dockerfile: dockerfile
+    context: .
+   command: bash -c "dotnet ef database update --project backend.csproj --startup-project backend.csproj && dotnet backend.dll"
+   environment:
+      - ASPNETCORE_URLS=https://+:5020
+      # - ASPNETCORE_HTTPS_PORT=5020 
+      - ASPNETCORE_ENVIRONMENT=Development 
+      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=moviequest;Uid=UsuarioRoot;Pwd=123456;
+   ports:
+    #  - "80:80"    
+     - "5020:5020"
+   networks:
+      - backend_network
+   depends_on:
+      db:
+        condition: service_healthy
+   restart: always
+  
+
+networks:
+  backend_network:
+    driver: bridge
+
+volumes:
+  mysql-data:

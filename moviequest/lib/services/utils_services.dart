@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class UtilsServices {
-  static final _storage = const FlutterSecureStorage();
 
-  static Future<void> saveLocalData(
+
+class UtilsServices {
+  final _storage = const FlutterSecureStorage();
+
+  Future<void> saveLocalData(
       {required String key, required String data}) async {
     await _storage.write(key: key, value: data);
   }
@@ -18,7 +20,7 @@ class UtilsServices {
     await _storage.delete(key: key);
   }
 
-  static void showToast({required message, bool isError = false}) {
+  void showToast({required message, bool isError = false}) {
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_LONG,
