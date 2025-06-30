@@ -45,6 +45,7 @@
 ```bash
 docker-compose up --build
 ```
+
 ---
 
 ### 📱 Frontend (Flutter)
@@ -65,14 +66,23 @@ flutter run
 ```bash
 moviequest/
 ├── backend/               # API em ASP.NET Core
+│   ├── models/
+│   ├── db/
+│   ├── models/
+│   ├── Migrations/
+│   ├── routes/
+│   ├── util/
 │   ├── Dockerfile
 │   ├── docker-compose.yml
 │   └── ...
 ├── frontend/              # App Flutter
 │   ├── lib/
-│   │   ├── models/        # Modelos com Freezed
-│   │   ├── stores/        # MobX Stores
-│   │   └── screens/
+│   │   ├── contansts/        
+│   │   ├── controllers/        
+│   │   ├── models/        
+│   │   ├── routes/        
+│   │   ├── services/        
+│   │   └── ui/
 │   └── pubspec.yaml
 └── README.md
 ```
