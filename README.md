@@ -45,6 +45,7 @@
 ```bash
 docker-compose up --build
 ```
+
 ---
 
 ### 📱 Frontend (Flutter)
